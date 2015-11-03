@@ -1,4 +1,4 @@
-package com.hancheng.optimizedapp;
+package com.hancheng.optimizedapp.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,20 +8,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.hancheng.optimizedapp.R;
+import com.hancheng.optimizedapp.adapters.MyAdapter;
+
 /**
  * Created by chan on 10/23/15.
  */
 public class ScrollListFragment extends Fragment {
 
-    private RecyclerView mRecyclerView;
-
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_recycler_list_view, container, false);
-        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.lists);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.setAdapter(new MyAdapter());
+        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.lists);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setAdapter(new MyAdapter());
         return rootView;
     }
 }

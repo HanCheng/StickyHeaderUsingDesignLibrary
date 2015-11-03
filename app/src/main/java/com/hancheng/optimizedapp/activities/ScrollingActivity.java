@@ -1,4 +1,4 @@
-package com.hancheng.optimizedapp;
+package com.hancheng.optimizedapp.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -13,36 +13,47 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
+
+import com.hancheng.optimizedapp.R;
+import com.hancheng.optimizedapp.fragments.ScrollListFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ScrollingActivity extends AppCompatActivity {
 
-    private CoordinatorLayout mRootView;
-    private static final float SCALE_MINIMUM=0.5f;
+    private static final float SCALE_MINIMUM = 0.5f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scrolling);
 
-        mRootView = (CoordinatorLayout) findViewById(R.id.root_view);
-        AppBarLayout appBarLayout = (AppBarLayout) mRootView.findViewById(R.id.app_bar);
-        final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) mRootView.findViewById(R.id.toolbar_layout);
-        Toolbar toolbar = (Toolbar) appBarLayout.findViewById(R.id.toolbar);
+        CoordinatorLayout rootView = (CoordinatorLayout) findViewById(R.id.root_view);
+        AppBarLayout appBarLayout = (AppBarLayout) rootView.findViewById(R.id.app_bar);
+        final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) rootView.findViewById(R.id.toolbar_layout);
+        collapsingToolbarLayout.setTitleEnabled(false);
+        final Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        final LinearLayout header = (LinearLayout) findViewById(R.id.search_header);
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                collapsingToolbarLayout.setTitle("");
+                int toolbarPlaceHolderHeight = header.getHeight() - Math.abs(verticalOffset);
+                if (toolbarPlaceHolderHeight <= toolbar.getHeight()) {
+                    toolbar.setVisibility(View.VISIBLE);
+                } else {
+                    toolbar.setVisibility(View.GONE);
+                }
             }
         });
 
-        TabLayout tabLayout = (TabLayout) appBarLayout.findViewById(R.id.tabs);
-
-        ViewPager viewPager = (ViewPager) mRootView.findViewById(R.id.view_pager);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
         ListFragmentPagerAdapter pagerAdapter = new ListFragmentPagerAdapter(getSupportFragmentManager());
         pagerAdapter.addFragment(new ScrollListFragment(), "Tab 1");
         pagerAdapter.addFragment(new ScrollListFragment(), "Tab 2");
@@ -55,6 +66,7 @@ public class ScrollingActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_scrolling, menu);
         return true;
     }
 

@@ -1,35 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true"
+    app:layout_collapseMode="parallax"
+    app:layout_scrollFlags="scroll|enterAlways"
+    android:background="@android:color/white"
     android:orientation="vertical">
-
 
     <TextView
         android:id="@+id/text_for_one"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
         android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
         android:layout_gravity="center_horizontal"
-        android:text="Testing header for 1st placeHolder"/>
-
-    <View
-        android:id="@+id/separator_one"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/grey_color" />
+        android:text="1st placeHolder"/>
 
     <TextView
-        android:id="@+id/text_for_two"
-        android:layout_width="wrap_content"
+        android:id="@+id/separator_one"
+        android:layout_width="match_parent"
+        android:layout_height="28dp"
+        android:text="Testing Text View"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:paddingTop="2dp"
+        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:background="@android:color/holo_green_dark" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="8dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:paddingTop="4dp"
         android:paddingBottom="8dp"
-        android:textSize="18sp"
-        android:layout_gravity="center_horizontal"
-        android:text="Testing header for 2nd placeHolder"/>
+        >
+
+        <TextView
+            android:id="@+id/text_for_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textColor="@android:color/black"
+            android:text="2nd placeHolder"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:textColor="@android:color/black"
+            android:text="3rd placeHolder" />
+
+    </RelativeLayout>
 
     <View
         android:id="@+id/separator_two"
@@ -37,14 +70,33 @@
         android:layout_height="1dp"
         android:background="@color/grey_color" />
 
-    <TextView
-        android:id="@+id/text_for_three"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:paddingBottom="8dp"
-        android:textSize="18sp"
-        android:layout_gravity="center_horizontal"
-        android:text="Testing header for 3rd placeHolder"/>
+    <LinearLayout
+        android:id="@+id/loading_view"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_margin="4dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:attr/progressBarStyleSmall" />
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4th placeholder"
+            android:textSize="15sp"
+            android:textColor="@android:color/black"
+            />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/separator_three"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey_color" />
 
 </LinearLayout>
