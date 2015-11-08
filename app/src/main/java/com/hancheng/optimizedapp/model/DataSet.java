@@ -9,19 +9,19 @@ import java.util.List;
 public class DataSet {
 
     private static final int INITIAL_DATA_SET_LIMIT = 60;
-    private static final DataSet mDataSets;
+    private static final DataSet sDataSets;
     private List<String> mResults = new ArrayList<>();
 
     static {
         try {
-            mDataSets = new DataSet();
+            sDataSets = new DataSet();
         } catch (Exception e) {
             throw new RuntimeException("An error occurred!", e);
         }
     }
 
     public static DataSet getInstance() {
-        return mDataSets;
+        return sDataSets;
     }
 
     private DataSet() {

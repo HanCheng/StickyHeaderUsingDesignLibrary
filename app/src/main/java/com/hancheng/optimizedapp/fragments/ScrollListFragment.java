@@ -16,13 +16,23 @@ import com.hancheng.optimizedapp.adapters.MyAdapter;
  */
 public class ScrollListFragment extends Fragment {
 
+    private MyAdapter mMyAdapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_recycler_list_view, container, false);
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.lists);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(new MyAdapter());
+        mMyAdapter = new MyAdapter();
+        recyclerView.setAdapter(mMyAdapter);
         return rootView;
+    }
+
+    public void notifyDataSetChanged() {
+        if (mMyAdapter != null && isAdded()) {
+            mMyAdapter.updateResults();
+            mMyAdapter.notifyDataSetChanged();
+        }
     }
 }

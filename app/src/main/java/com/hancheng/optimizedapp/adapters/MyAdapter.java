@@ -9,15 +9,17 @@ import android.widget.TextView;
 import com.hancheng.optimizedapp.R;
 import com.hancheng.optimizedapp.model.DataSet;
 
+import java.util.List;
+
 /**
  * Created by chan on 10/23/15.
  */
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
-    private String[] mResults = new String[DataSet.getInstance().getResults().size()];
+    private List<String> mResults = DataSet.getInstance().getResults();
 
     public MyAdapter() {
-        mResults = DataSet.getInstance().getResults().toArray(mResults);
+        mResults = DataSet.getInstance().getResults();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -38,12 +40,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        String text = mResults[position];
+        String text = mResults.get(position);
         holder.mText.setText(text);
     }
 
     @Override
     public int getItemCount() {
-        return mResults.length;
+        return mResults.size();
+    }
+
+    public void updateResults() {
+        mResults.clear();
+        mResults.addAll(DataSet.getInstance().getResults());
     }
 }

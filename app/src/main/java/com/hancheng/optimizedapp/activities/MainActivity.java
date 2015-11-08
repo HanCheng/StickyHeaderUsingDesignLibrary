@@ -1,5 +1,6 @@
 package com.hancheng.optimizedapp.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -22,9 +23,10 @@ import com.hancheng.optimizedapp.fragments.ScrollListFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ScrollingActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
-    private static final float SCALE_MINIMUM = 0.5f;
+    private ListFragmentPagerAdapter mPagerAdapter;
+    private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,20 +55,26 @@ public class ScrollingActivity extends AppCompatActivity {
         });
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
-        ListFragmentPagerAdapter pagerAdapter = new ListFragmentPagerAdapter(getSupportFragmentManager());
-        pagerAdapter.addFragment(new ScrollListFragment(), "Tab 1");
-        pagerAdapter.addFragment(new ScrollListFragment(), "Tab 2");
-        pagerAdapter.addFragment(new ScrollListFragment(), "Tab 3");
-        pagerAdapter.addFragment(new ScrollListFragment(), "Tab 4");
-        viewPager.setAdapter(pagerAdapter);
-        tabLayout.setupWithViewPager(viewPager);
+        mViewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
+        mPagerAdapter = new ListFragmentPagerAdapter(getSupportFragmentManager());
+        mPagerAdapter.addFragment(new ScrollListFragment(), "Tab 1");
+        mPagerAdapter.addFragment(new ScrollListFragment(), "Tab 2");
+        mPagerAdapter.addFragment(new ScrollListFragment(), "Tab 3");
+        mPagerAdapter.addFragment(new ScrollListFragment(), "Tab 4");
+        mViewPager.setAdapter(mPagerAdapter);
+        tabLayout.setupWithViewPager(mViewPager);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        notifyDataSetChanged();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_scrolling, menu);
+        getMenuInflater().inflate(R.menu.filter_menu, menu);
         return true;
     }
 
@@ -77,11 +85,18 @@ public class ScrollingActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_filter) {
+            Intent intent = new Intent(MainActivity.this, FilterActivity.class);
+            startActivity(intent);
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void notifyDataSetChanged() {
+        if (mPagerAdapter != null) {
+            mPagerAdapter.notifyDataSetChanged();
+        }
     }
 
     public class ListFragmentPagerAdapter extends FragmentPagerAdapter {
@@ -111,6 +126,15 @@ public class ScrollingActivity extends AppCompatActivity {
         @Override
         public CharSequence getPageTitle(int position) {
             return mFragmentTitles.get(position);
+        }
+
+        @Override
+        public void notifyDataSetChanged() {
+            super.notifyDataSetChanged();
+            for (int i = 0; i < mFragments.size(); i++) {
+                ScrollListFragment scrollListFragment = (ScrollListFragment) mFragments.get(i);
+                scrollListFragment.notifyDataSetChanged();
+            }
         }
     }
 }
