@@ -19,7 +19,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private List<String> mResults = DataSet.getInstance().getResults();
 
     public MyAdapter() {
-        mResults = DataSet.getInstance().getResults();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -47,10 +46,5 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public int getItemCount() {
         return mResults.size();
-    }
-
-    public void updateResults() {
-        mResults.clear();
-        mResults.addAll(DataSet.getInstance().getResults());
     }
 }

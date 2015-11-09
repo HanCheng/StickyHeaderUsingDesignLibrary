@@ -31,7 +31,6 @@ public class ScrollListFragment extends Fragment {
 
     public void notifyDataSetChanged() {
         if (mMyAdapter != null && isAdded()) {
-            mMyAdapter.updateResults();
             mMyAdapter.notifyDataSetChanged();
         }
     }

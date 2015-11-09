@@ -93,7 +93,11 @@
     <string name="action_filter">Filter</string>
     <string name="title_activity_filter">FilterActivity</string>
     <string name="one_item">Select to show one item</string>
-    <string name="ten_item">Select to show ten item</string>
-    <string name="twenty_item">Select to show twenty item</string>
+    <string name="ten_item">Select to show ten items</string>
+    <string name="twenty_item">Select to show twenty items</string>
+    <string name="all_item">Select to show all items</string>
     <string name="filter_done">Done</string>
+    <string name="overflow_filter_one">One</string>
+    <string name="overflow_filter_ten">Ten</string>
+    <string name="overflow_filter_twenty">Twenty</string>
 </resources>

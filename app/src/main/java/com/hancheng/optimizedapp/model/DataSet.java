@@ -9,16 +9,8 @@ import java.util.List;
 public class DataSet {
 
     private static final int INITIAL_DATA_SET_LIMIT = 60;
-    private static final DataSet sDataSets;
+    private static final DataSet sDataSets = new DataSet();
     private List<String> mResults = new ArrayList<>();
-
-    static {
-        try {
-            sDataSets = new DataSet();
-        } catch (Exception e) {
-            throw new RuntimeException("An error occurred!", e);
-        }
-    }
 
     public static DataSet getInstance() {
         return sDataSets;
@@ -41,6 +33,10 @@ public class DataSet {
             case 2:
                 mResults.clear();
                 setDataSet(20);
+                break;
+            case 3:
+                mResults.clear();
+                setDataSet(0);
                 break;
             default:
                 mResults.clear();

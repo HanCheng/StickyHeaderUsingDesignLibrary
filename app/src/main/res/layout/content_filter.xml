@@ -55,5 +55,18 @@
             android:textColor="@android:color/black"
             android:textSize="18sp"/>
 
+        <RadioButton
+            android:id="@+id/checkbox_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:layout_below="@id/checkbox_3"
+            android:paddingLeft="32dip"
+            android:paddingRight="12dip"
+            android:layout_marginTop="10dp"
+            android:text="@string/all_item"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"/>
+
     </RadioGroup>
 </RelativeLayout>
