@@ -1,7 +1,10 @@
 package com.hancheng.optimizedapp.activities;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -15,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.LinearInterpolator;
 import android.widget.LinearLayout;
 
 import com.hancheng.optimizedapp.R;
@@ -27,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ListFragmentPagerAdapter mPagerAdapter;
     private ViewPager mViewPager;
+    private Toolbar mToolbar;
+    private ObjectAnimator mFadeOutAnimation, mFadeInAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,20 +43,38 @@ public class MainActivity extends AppCompatActivity {
         AppBarLayout appBarLayout = (AppBarLayout) rootView.findViewById(R.id.app_bar);
         final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) rootView.findViewById(R.id.toolbar_layout);
         collapsingToolbarLayout.setTitleEnabled(false);
-        final Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        mToolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+//        createToolBarAnimation();
         final LinearLayout header = (LinearLayout) findViewById(R.id.search_header);
+        final LinearLayout loadingView = (LinearLayout) header.findViewById(R.id.loading_view);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                loadingView.setVisibility(View.GONE);
+            }
+        }, 3000L);
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                int toolbarPlaceHolderHeight = header.getHeight() - Math.abs(verticalOffset);
-                if (toolbarPlaceHolderHeight <= toolbar.getHeight()) {
-                    toolbar.setVisibility(View.VISIBLE);
-                } else {
-                    toolbar.setVisibility(View.GONE);
-                }
+//                int toolbarPlaceHolderHeight = header.getHeight() - Math.abs(verticalOffset);
+//                Log.e("MainActivity", " verticalOffset =================   " + verticalOffset);
+//                Log.e("MainActivity", " header height  =================   " + header.getHeight());
+//                Log.e("MainActivity", " toolbarPlaceHolderHeight =================   " + toolbarPlaceHolderHeight);
+//                Log.e("MainActivity", " toolbar height =================   " + mToolbar.getHeight());
+//                Log.e("MainActivity", " +++++++++++++++++++++++++++++");
+//
+//                if (toolbarPlaceHolderHeight <= 168) {
+//                    mFadeInAnimation.start();
+//                    mFadeOutAnimation.cancel();
+//                }
+//
+//                if (toolbarPlaceHolderHeight == 1 && Math.abs(verticalOffset)) {
+//                    mFadeOutAnimation.start();
+//                    mFadeInAnimation.cancel();
+//                }
             }
         });
 
@@ -97,6 +121,57 @@ public class MainActivity extends AppCompatActivity {
         if (mPagerAdapter != null) {
             mPagerAdapter.notifyDataSetChanged();
         }
+    }
+
+    private void createToolBarAnimation() {
+        mFadeOutAnimation = ObjectAnimator.ofFloat(mToolbar, View.ALPHA, 1f, 0f);
+        mFadeInAnimation = ObjectAnimator.ofFloat(mToolbar, View.ALPHA, 0f, 1f);
+        mFadeOutAnimation.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                mToolbar.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
+        mFadeInAnimation.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                mToolbar.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
+        mFadeInAnimation.setInterpolator(new LinearInterpolator());
+        mFadeOutAnimation.setInterpolator(new LinearInterpolator());
+        mFadeInAnimation.setDuration(20);
+        mFadeOutAnimation.setDuration(20);
     }
 
     public class ListFragmentPagerAdapter extends FragmentPagerAdapter {
