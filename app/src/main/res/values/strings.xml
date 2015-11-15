@@ -100,4 +100,5 @@
     <string name="overflow_filter_one">One</string>
     <string name="overflow_filter_ten">Ten</string>
     <string name="overflow_filter_twenty">Twenty</string>
+    <string name="title_activity_starter">ResultsActivity</string>
 </resources>

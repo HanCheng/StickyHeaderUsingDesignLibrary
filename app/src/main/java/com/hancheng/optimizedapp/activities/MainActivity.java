@@ -47,44 +47,35 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        createToolBarAnimation();
         final LinearLayout header = (LinearLayout) findViewById(R.id.search_header);
         final LinearLayout loadingView = (LinearLayout) header.findViewById(R.id.loading_view);
+        final View sparatorThree = header.findViewById(R.id.separator_three);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 loadingView.setVisibility(View.GONE);
+                sparatorThree.setVisibility(View.GONE);
             }
         }, 3000L);
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-//                int toolbarPlaceHolderHeight = header.getHeight() - Math.abs(verticalOffset);
-//                Log.e("MainActivity", " verticalOffset =================   " + verticalOffset);
-//                Log.e("MainActivity", " header height  =================   " + header.getHeight());
-//                Log.e("MainActivity", " toolbarPlaceHolderHeight =================   " + toolbarPlaceHolderHeight);
-//                Log.e("MainActivity", " toolbar height =================   " + mToolbar.getHeight());
-//                Log.e("MainActivity", " +++++++++++++++++++++++++++++");
-//
-//                if (toolbarPlaceHolderHeight <= 168) {
-//                    mFadeInAnimation.start();
-//                    mFadeOutAnimation.cancel();
-//                }
-//
-//                if (toolbarPlaceHolderHeight == 1 && Math.abs(verticalOffset)) {
-//                    mFadeOutAnimation.start();
-//                    mFadeInAnimation.cancel();
-//                }
+                int toolbarPlaceHolderHeight = header.getHeight() - Math.abs(verticalOffset);
+                if (toolbarPlaceHolderHeight <= 168) {
+                    mToolbar.setVisibility(View.VISIBLE);
+                } else {
+                    mToolbar.setVisibility(View.GONE);
+                }
             }
         });
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         mViewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
         mPagerAdapter = new ListFragmentPagerAdapter(getSupportFragmentManager());
-        mPagerAdapter.addFragment(new ScrollListFragment(), "Tab 1");
-        mPagerAdapter.addFragment(new ScrollListFragment(), "Tab 2");
-        mPagerAdapter.addFragment(new ScrollListFragment(), "Tab 3");
-        mPagerAdapter.addFragment(new ScrollListFragment(), "Tab 4");
+        mPagerAdapter.addFragment(new ScrollListFragment(), "LOWEST PRICE");
+        mPagerAdapter.addFragment(new ScrollListFragment(), "QUICKEST");
+        mPagerAdapter.addFragment(new ScrollListFragment(), "EARLIEST DEPARTURE");
+        mPagerAdapter.addFragment(new ScrollListFragment(), "LATEST ARRIVAL");
         mViewPager.setAdapter(mPagerAdapter);
         tabLayout.setupWithViewPager(mViewPager);
     }
@@ -121,6 +112,12 @@ public class MainActivity extends AppCompatActivity {
         if (mPagerAdapter != null) {
             mPagerAdapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 
     private void createToolBarAnimation() {

@@ -9,38 +9,64 @@
     android:background="@android:color/white"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/text_for_one"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:id="@+id/layout_one"
         android:layout_marginTop="4dp"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:layout_gravity="center_horizontal"
-        android:text="1st placeHolder"/>
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/text_for_departure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:layout_gravity="center_horizontal"
+            android:text="NYC"/>
+
+        <ImageView
+            android:src="@mipmap/plane"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/text_for_arrival"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:layout_gravity="center_horizontal"
+            android:text="SFO"/>
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/separator_one"
         android:layout_width="match_parent"
         android:layout_height="28dp"
-        android:text="Testing Text View"
+        android:text="Select outbound for Sat, Nov 28"
         android:textColor="@android:color/white"
         android:textSize="16sp"
-        android:paddingTop="2dp"
-        android:gravity="center_horizontal"
+        android:paddingTop="4dp"
+        android:paddingLeft="12dp"
         android:textStyle="bold"
-        android:background="@android:color/holo_green_dark" />
+        android:background="#589442" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
-        android:paddingTop="4dp"
-        android:paddingBottom="8dp"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         >
 
         <TextView
@@ -50,8 +76,8 @@
             android:textSize="13sp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:textColor="@android:color/black"
-            android:text="2nd placeHolder"/>
+            android:textColor="@android:color/darker_gray"
+            android:text="60 of 60 results"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -59,8 +85,8 @@
             android:textSize="13sp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:textColor="@android:color/black"
-            android:text="3rd placeHolder" />
+            android:textColor="@android:color/darker_gray"
+            android:text="Baggage fees" />
 
     </RelativeLayout>
 
@@ -86,10 +112,19 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="4th placeholder"
+            android:text="Searching flights"
             android:textSize="15sp"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/darker_gray"
+            android:paddingLeft="5dp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:paddingRight="4dp"
             />
+
+        <ImageView
+            android:src="@mipmap/plane"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

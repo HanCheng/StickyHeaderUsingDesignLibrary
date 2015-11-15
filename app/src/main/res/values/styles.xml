@@ -20,6 +20,12 @@
     <style name="ToolbarTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@android:color/holo_green_dark</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    </style>
+    
+    <style name="TabBarLayout_Theme" parent="@style/AppTheme" >
+        <item name="android:singleLine">true</item>
     </style>
 
 </resources>

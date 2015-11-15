@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.hancheng.optimizedapp.R;
 import com.hancheng.optimizedapp.adapters.MyAdapter;
+import com.hancheng.optimizedapp.layouts.DividerItemDecoration;
 
 /**
  * Created by chan on 10/23/15.
@@ -24,6 +25,8 @@ public class ScrollListFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_recycler_list_view, container, false);
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.lists);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity()));
         mMyAdapter = new MyAdapter();
         recyclerView.setAdapter(mMyAdapter);
         return rootView;
