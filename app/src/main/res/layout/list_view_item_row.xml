@@ -1,19 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    android:layout_marginTop="5dp" >
+    android:layout_marginTop="4dp"
+    android:paddingBottom="8dp"
+    android:paddingRight="10dp"
+    android:paddingLeft="10dp">
 
     <TextView
-        android:id="@+id/content_text"
+        android:id="@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:layout_margin="10dp"
-        android:textSize="16sp"
+        android:textSize="37sp"
         android:textColor="@android:color/black"
-        android:text="This is text for testing"/>
+        android:text="$131"/>
+    
+    <TextView
+        android:id="@+id/airline_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/airline_logo"
+        android:layout_marginTop="20dp"
+        android:textSize="15sp"
+        android:text="Multiple Airlines"/>
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/airline_logo"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="8dp"
+        android:layout_alignParentRight="true"
+        android:src="@mipmap/ic_multiple_airlines"/>
+
+    <RelativeLayout
+        android:layout_below="@id/price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    
+        <TextView
+            android:id="@+id/time"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:text="01:20 - 14:15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/row_number"
+            android:textSize="15sp"
+            android:text="Row 1"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

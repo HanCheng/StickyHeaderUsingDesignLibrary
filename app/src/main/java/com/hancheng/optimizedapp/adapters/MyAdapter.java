@@ -24,10 +24,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView mText;
+        public TextView mRowNumber;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            mText = (TextView) itemView.findViewById(R.id.content_text);
+            mText = (TextView) itemView.findViewById(R.id.price);
+            mRowNumber = (TextView) itemView.findViewById(R.id.row_number);
         }
     }
 
@@ -39,8 +41,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        String text = mResults.get(position);
+        String text = "$" + (position + 131);
         holder.mText.setText(text);
+        holder.mRowNumber.setText(mResults.get(position));
     }
 
     @Override

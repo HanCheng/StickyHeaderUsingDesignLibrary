@@ -47,7 +47,7 @@ public class DataSet {
 
     private void setDataSet(int size) {
         for (int i = 0; i < (size == 0 ? INITIAL_DATA_SET_LIMIT : size); i ++) {
-            mResults.add("This is testing for row " + (i + 1));
+            mResults.add("Row " + (i + 1));
         }
     }
 
