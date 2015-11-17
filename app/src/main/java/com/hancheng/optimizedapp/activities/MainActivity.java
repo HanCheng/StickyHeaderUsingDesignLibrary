@@ -1,7 +1,5 @@
 package com.hancheng.optimizedapp.activities;
 
-import android.animation.Animator;
-import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,7 +16,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.LinearInterpolator;
 import android.widget.LinearLayout;
 
 import com.hancheng.optimizedapp.R;
@@ -30,9 +27,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private ListFragmentPagerAdapter mPagerAdapter;
-    private ViewPager mViewPager;
     private Toolbar mToolbar;
-    private ObjectAnimator mFadeOutAnimation, mFadeInAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
                 int toolbarPlaceHolderHeight = header.getHeight() - Math.abs(verticalOffset);
                 if (toolbarPlaceHolderHeight <= 168) {
                     mToolbar.setVisibility(View.VISIBLE);
+                    mToolbar.setTitle("NYC - SFO");
+                    mToolbar.setSubtitle("Outbound Sat, Nov 28");
                 } else {
                     mToolbar.setVisibility(View.GONE);
                 }
@@ -70,14 +67,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        mViewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
+        ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
         mPagerAdapter = new ListFragmentPagerAdapter(getSupportFragmentManager());
         mPagerAdapter.addFragment(new ScrollListFragment(), "LOWEST PRICE");
         mPagerAdapter.addFragment(new ScrollListFragment(), "QUICKEST");
         mPagerAdapter.addFragment(new ScrollListFragment(), "EARLIEST DEPARTURE");
         mPagerAdapter.addFragment(new ScrollListFragment(), "LATEST ARRIVAL");
-        mViewPager.setAdapter(mPagerAdapter);
-        tabLayout.setupWithViewPager(mViewPager);
+        viewPager.setAdapter(mPagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     @Override
@@ -118,57 +115,6 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         finish();
-    }
-
-    private void createToolBarAnimation() {
-        mFadeOutAnimation = ObjectAnimator.ofFloat(mToolbar, View.ALPHA, 1f, 0f);
-        mFadeInAnimation = ObjectAnimator.ofFloat(mToolbar, View.ALPHA, 0f, 1f);
-        mFadeOutAnimation.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animator) {
-                mToolbar.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animator) {
-
-            }
-        });
-        mFadeInAnimation.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animator) {
-                mToolbar.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animator) {
-
-            }
-        });
-        mFadeInAnimation.setInterpolator(new LinearInterpolator());
-        mFadeOutAnimation.setInterpolator(new LinearInterpolator());
-        mFadeInAnimation.setDuration(20);
-        mFadeOutAnimation.setDuration(20);
     }
 
     public class ListFragmentPagerAdapter extends FragmentPagerAdapter {

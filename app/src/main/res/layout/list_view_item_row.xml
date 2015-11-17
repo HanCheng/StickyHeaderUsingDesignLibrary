@@ -6,8 +6,8 @@
     android:background="@android:color/white"
     android:layout_marginTop="4dp"
     android:paddingBottom="8dp"
-    android:paddingRight="10dp"
-    android:paddingLeft="10dp">
+    android:paddingRight="12dp"
+    android:paddingLeft="12dp">
 
     <TextView
         android:id="@+id/price"

@@ -20,11 +20,11 @@
         </activity>
         <activity
             android:name=".activities.FilterActivity"
-            android:label="@string/title_activity_filter"
+            android:label="@string/filters_title"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.MainActivity"
-            android:label="@string/title_activity_starter"
+            android:label="@string/outbound_title"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
