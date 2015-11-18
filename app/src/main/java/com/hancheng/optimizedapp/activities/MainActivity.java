@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.hancheng.optimizedapp.R;
+import com.hancheng.optimizedapp.views.TitleView;
 import com.hancheng.optimizedapp.fragments.ScrollListFragment;
 
 import java.util.ArrayList;
@@ -28,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
 
     private ListFragmentPagerAdapter mPagerAdapter;
     private Toolbar mToolbar;
+    private TitleView mToolBarTitleView;
+    private TitleView mFloatTitleView;
+    private boolean isHideToolbarView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,15 +40,21 @@ public class MainActivity extends AppCompatActivity {
 
         CoordinatorLayout rootView = (CoordinatorLayout) findViewById(R.id.root_view);
         AppBarLayout appBarLayout = (AppBarLayout) rootView.findViewById(R.id.app_bar);
-        final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) rootView.findViewById(R.id.toolbar_layout);
-        collapsingToolbarLayout.setTitleEnabled(false);
+        final CollapsingToolbarLayout collapsingToolbarLayout = (CollapsingToolbarLayout) rootView.findViewById(R.id.collapsing_toolbar_layout);
+        collapsingToolbarLayout.setTitle(" ");
         mToolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.mipmap.ic_arrow_left);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         final LinearLayout header = (LinearLayout) findViewById(R.id.search_header);
         final LinearLayout loadingView = (LinearLayout) header.findViewById(R.id.loading_view);
         final View sparatorThree = header.findViewById(R.id.separator_three);
+        mToolBarTitleView = (TitleView) rootView.findViewById(R.id.toolbar_title_view);
+        mFloatTitleView = (TitleView) rootView.findViewById(R.id.float_toolbar_title_view);
+        mToolBarTitleView.bindTo("NYC - SFO", "Outbound Sat, Nov 28");
+        mFloatTitleView.bindTo("NYC - SFO", "Outbound Sat, Nov 28");
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -52,16 +62,18 @@ public class MainActivity extends AppCompatActivity {
                 sparatorThree.setVisibility(View.GONE);
             }
         }, 3000L);
+
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                int toolbarPlaceHolderHeight = header.getHeight() - Math.abs(verticalOffset);
-                if (toolbarPlaceHolderHeight <= 168) {
-                    mToolbar.setVisibility(View.VISIBLE);
-                    mToolbar.setTitle("NYC - SFO");
-                    mToolbar.setSubtitle("Outbound Sat, Nov 28");
-                } else {
-                    mToolbar.setVisibility(View.GONE);
+                int maxScroll = appBarLayout.getTotalScrollRange();
+                float percentage = (float) Math.abs(verticalOffset) / (float) maxScroll;
+                if (percentage == 1f && isHideToolbarView) {
+                    mToolBarTitleView.setVisibility(View.VISIBLE);
+                    isHideToolbarView = !isHideToolbarView;
+                } else if (percentage < 1f && !isHideToolbarView) {
+                    mToolBarTitleView.setVisibility(View.GONE);
+                    isHideToolbarView = !isHideToolbarView;
                 }
             }
         });
