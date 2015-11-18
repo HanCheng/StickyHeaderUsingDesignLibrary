@@ -16,7 +16,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
+            android:id="@+id/collapsing_toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:contentScrim="?attr/colorPrimary"
@@ -35,7 +35,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:subtitleTextAppearance="@style/ToolbarTitle"
-                app:layout_collapseMode="pin" />
+                app:layout_collapseMode="pin" >
+
+                <include
+                    android:id="@+id/toolbar_title_view"
+                    layout="@layout/title_view_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                 />
+            </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -60,6 +69,14 @@
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" >
     </android.support.v4.view.ViewPager>
+
+    <include
+        android:id="@+id/float_toolbar_title_view"
+        layout="@layout/title_view_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="com.hancheng.optimizedapp.behaviors.ToolBarBehavior"
+        />
 
 
 </android.support.design.widget.CoordinatorLayout>
